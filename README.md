@@ -10,6 +10,13 @@ This is small nestjs project that has zoho sign integration to send pdf document
 - Nodejs 
 - npm 
 - Nestjs
+- create a zoho sign account
+
+- How to setup zoho sign client:
+  ```
+  https://www.zoho.com/accounts/protocol/oauth-setup.html
+  ```
+
 - How to create pdf file with e-sign tags:
  
   ```
