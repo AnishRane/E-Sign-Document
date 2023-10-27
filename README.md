@@ -115,8 +115,6 @@ curl --location 'http://localhost:3000/document/sendSignRequest' \
 This can be imported to postman for testing the API.
 ## Run Locally
 
-Clone the project
-
 Configure your NODE_ENV environment in package.json
 
 ```bash
