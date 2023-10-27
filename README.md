@@ -40,7 +40,7 @@ https://help.zoho.com/portal/en/kb/zoho-sign/user-guide/sending-a-document/artic
   ```
 - Create respective .env file accordingly
   ```
-  touch local.env
+  touch ./env/local.env
   ```
 - Environment variables needed to be configured to run the project:
   ```
