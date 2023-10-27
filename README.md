@@ -61,7 +61,7 @@ This is small nestjs project that has zoho sign integration to send pdf document
   ```
 ## API Reference
 
-#### Get all items [just for dev purposes]
+#### Get newly generated Zoho Oauth Token [just for dev purposes]
 - Generate new Oauth access token for zoho apis
 
 ```http
@@ -69,7 +69,7 @@ This is small nestjs project that has zoho sign integration to send pdf document
 ```
 
 
-#### Get item [just for dev purposes]
+#### Get valid zoho oauth token [just for dev purposes]
 
 ```http
   GET /document/tokenDetails
