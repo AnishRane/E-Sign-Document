@@ -9,13 +9,13 @@ This is small nestjs project that has zoho sign integration to send pdf document
 ## Pre-Requisites
 - How to create pdf file with e-sign tags:
  
- ```https://help.zoho.com/portal/en/kb/zoho-sign/user-guide/sending-a-document/articles/automatic-field-addition-in-zoho-sign```
+ ```https://help.zoho.com/portal/en/kb/zoho-sign/user-guide/sending-a-document/articles/automatic-field-addition-in-zoho-sign
+```
 
 - API Documentation for Zoho Sign:
   
+  ```https://www.zoho.com/sign/api/#introduction
   ```
-    https://www.zoho.com/sign/api/#introduction
-    ```
 
 
 
