@@ -7,13 +7,27 @@ This is small nestjs project that has zoho sign integration to send pdf document
 
 
 ## Pre-Requisites
+- Nodejs 
+- npm 
+- Nestjs
+- create a zoho sign account
+
+- How to setup zoho sign client:
+  ```
+  https://www.zoho.com/accounts/protocol/oauth-setup.html
+  ```
+
 - How to create pdf file with e-sign tags:
-  ```https://help.zoho.com/portal/en/kb/zoho-sign/user-guide/sending-a-document/articles/automatic-field-addition-in-zoho-sign```
+ 
+  ```
+  https://help.zoho.com/portal/en/kb/zoho-sign/user-guide/sending-a-document/articles/automatic-field-addition-in-zoho-sign
+  ```
 
 - API Documentation for Zoho Sign:
-    ```
-    https://www.zoho.com/sign/api/#introduction
-    ```
+  
+  ```
+   https://www.zoho.com/sign/api/#introduction
+  ```
 
 
 
@@ -24,7 +38,7 @@ This is small nestjs project that has zoho sign integration to send pdf document
   ```
 - Go to project directory
   ```
-  cd Document E-sign
+  cd E-Sign-Document
   ```
 - Install dependencies
   ```
@@ -36,7 +50,7 @@ This is small nestjs project that has zoho sign integration to send pdf document
   ```
 - Create respective .env file accordingly
   ```
-  touch local.env
+  touch ./env/local.env
   ```
 - Environment variables needed to be configured to run the project:
   ```
@@ -47,7 +61,7 @@ This is small nestjs project that has zoho sign integration to send pdf document
   ```
 ## API Reference
 
-#### Get all items [just for dev purposes]
+#### Get newly generated Zoho Oauth Token [just for dev purposes]
 - Generate new Oauth access token for zoho apis
 
 ```http
@@ -55,7 +69,7 @@ This is small nestjs project that has zoho sign integration to send pdf document
 ```
 
 
-#### Get item [just for dev purposes]
+#### Get valid zoho oauth token [just for dev purposes]
 
 ```http
   GET /document/tokenDetails
@@ -101,8 +115,6 @@ curl --location 'http://localhost:3000/document/sendSignRequest' \
 This can be imported to postman for testing the API.
 ## Run Locally
 
-Clone the project
-
 Configure your NODE_ENV environment in package.json
 
 ```bash
@@ -114,4 +126,3 @@ Start the server
 ```bash
   npm run start:dev
 ```
-
