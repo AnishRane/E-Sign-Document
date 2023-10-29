@@ -17,7 +17,6 @@ import { DocuOperationsDto } from './docuops.dto';
 @Controller('document')
 export class DocumentOperationsController {
   constructor(
-    private readonly environmentConfigService: EnvironmentConfigService,
     private readonly zohoOauthTokenService: ZohoOauthTokenService,
     private readonly documentOpsService: DocumentOpsService,
   ) {}
@@ -38,7 +37,7 @@ export class DocumentOperationsController {
   @Post('sendSignRequest')
   @UseInterceptors(
     TokenInterceptor,
-    FileFieldsInterceptor([{ name: 'documents', maxCount: 10 }]), // Max count is set to 10 , as per zoho documentation it can only process 10 files in one document request
+    FileFieldsInterceptor([{ name: 'documents', maxCount: 1 }]), // Max count is set to 10 , as per zoho documentation it can only process 10 files in one document request
   )
   async initiateSignRequest(
     @UploadedFiles() files,
@@ -56,5 +55,11 @@ export class DocumentOperationsController {
     } else {
       return { message: 'Error' };
     }
+  }
+
+  // Just for testing purpose
+  @Post('testWebhook')
+  async zohoSignWebhook(@Body() body) {
+    console.log('Body: ', body);
   }
 }

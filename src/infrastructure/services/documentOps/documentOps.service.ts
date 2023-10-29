@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import axios, { AxiosResponse } from 'axios';
+import { error } from 'console';
 import * as FormData from 'form-data';
 
 interface RecipientInfo {
@@ -9,26 +10,6 @@ interface RecipientInfo {
 
 @Injectable()
 export class DocumentOpsService {
-  generateActions(recipients: RecipientInfo[], numFiles: number) {
-    const actions = [];
-    for (let i = 0; i < numFiles; i++) {
-      recipients.forEach((recipient) => {
-        const action = {
-          recipient_name: recipient.name,
-          recipient_email: recipient.email,
-          action_type: 'SIGN',
-          private_notes: 'Please get back to us for further queries',
-          signing_order: 0,
-          verify_recipient: true,
-          verification_type: 'EMAIL',
-          verification_code: '',
-        };
-        actions.push(action);
-      });
-    }
-    return actions;
-  }
-
   async createAndSubmitDocument(
     recipients: RecipientInfo[],
     files: Express.Multer.File[],
@@ -44,7 +25,20 @@ export class DocumentOpsService {
       });
     });
 
-    const actions = this.generateActions(recipients, files['documents'].length);
+    const actions = [];
+    for (let i = 0; i < recipients.length; i++) {
+      const action = {
+        recipient_name: recipients[i].name,
+        recipient_email: recipients[i].email,
+        action_type: 'SIGN',
+        private_notes: 'Please get back to us for further queries',
+        signing_order: i + 1,
+        verify_recipient: false,
+        verification_type: 'EMAIL',
+        verification_code: '',
+      };
+      actions.push(action);
+    }
 
     const docJson = {
       requests: {
@@ -67,35 +61,12 @@ export class DocumentOpsService {
 
       if (response.data.status === 'success') {
         const request_id = response.data.requests.request_id;
-        const actions = response.data.requests.actions;
-        for (let i = 0; i < actions.length; i++) {
-          const action = actions[i];
-          if (action.action_type === 'SIGN') {
-            const fields = [];
-            const documents = response.data.requests.document_ids;
-            for (let j = 0; j < documents.length; j++) {
-              const document_id = documents[j].document_id;
-              const sigField = {
-                field_type_name: 'Signature',
-                is_mandatory: true,
-                field_name: 'Signature',
-                page_no: 0,
-                y_coord: 669,
-                abs_width: 150,
-                description_tooltip: '',
-                x_coord: 72,
-                abs_height: 20,
-                document_id: document_id,
-              };
-              fields.push(sigField);
-            }
-            action.fields = fields;
-            delete action.allow_signing;
-            delete action.action_status;
-          }
-        }
-
         const submitForm = new FormData();
+        const actions = response.data.requests.actions.map((action) => {
+          delete action.action_status;
+          delete action.allow_signing;
+          return action;
+        });
         submitForm.append('data', JSON.stringify({ requests: { actions } }));
 
         const submitResponse: AxiosResponse = await axios.post(
@@ -110,7 +81,7 @@ export class DocumentOpsService {
         }
       }
     } catch (error) {
-      throw error;
+      throw new Error('Something went wrong');
     }
   }
 }
