@@ -3,22 +3,21 @@
 
 This is small nestjs project that has zoho sign integration to send pdf documents for signature for recipients.
 
-
-
-
 ## Pre-Requisites
-- Nodejs 
-- npm 
+
+- Nodejs
+- npm
 - Nestjs
 - create a zoho sign account
 
 - How to setup zoho sign client:
+
   ```
   https://www.zoho.com/accounts/protocol/oauth-setup.html
   ```
 
 - How to create pdf file with e-sign tags:
- 
+
   ```
   https://help.zoho.com/portal/en/kb/zoho-sign/user-guide/sending-a-document/articles/automatic-field-addition-in-zoho-sign
   ```
@@ -29,45 +28,56 @@ This is small nestjs project that has zoho sign integration to send pdf document
    https://www.zoho.com/sign/api/#introduction
   ```
 
+## 🛠 How To Setup
 
-
-## 🛠 How To Setup 
 - Clone the repository  
+
   ```
   git clone git@github.com:AnishRane/E-Sign-Document.git
   ```
+
 - Go to project directory
+
   ```
   cd E-Sign-Document
   ```
+
 - Install dependencies
+
   ```
   npm install
   ```
+
 - Create a Environment folder within the repository
+
   ```
   mkdir env
   ```
+
 - Create respective .env file accordingly
+
   ```
   touch ./env/local.env
   ```
+
 - Environment variables needed to be configured to run the project:
+
   ```
   ZOHO_REFRESH_TOKEN=""
   ZOHO_CLIENT_ID=""
   ZOHO_CLIENT_SECRET=""
   ZOHO_OAUTH_TOKEN_API="https://accounts.zoho.in/oauth/v2/token"
   ```
+
 ## API Reference
 
 #### Get newly generated Zoho Oauth Token [just for dev purposes]
+
 - Generate new Oauth access token for zoho apis
 
 ```http
   GET /document/token
 ```
-
 
 #### Get valid zoho oauth token [just for dev purposes]
 
@@ -76,6 +86,7 @@ This is small nestjs project that has zoho sign integration to send pdf document
 ```
 
 #### Upload and submit file for e-sign
+
 ```http
  POST /document/sendSignRequest
 ```
@@ -86,6 +97,7 @@ This is small nestjs project that has zoho sign integration to send pdf document
 `files` | `files` | **Required**. Files to be uploaded
 
 This api accepts the receipients in array like:
+
 ```
 [
     {
@@ -94,9 +106,11 @@ This api accepts the receipients in array like:
     }
 ]
 ```
+
 And files to be uploaded and sent for e-signing.
 
 - Curl request:
+
 ```
 curl --location 'http://localhost:3000/document/sendSignRequest' \
 --form 'documents=@"/Users/anishrane/Downloads/testDoc2.pdf"' \
@@ -112,7 +126,9 @@ curl --location 'http://localhost:3000/document/sendSignRequest' \
   }
 ]"'
 ```
+
 This can be imported to postman for testing the API.
+
 ## Run Locally
 
 Configure your NODE_ENV environment in package.json

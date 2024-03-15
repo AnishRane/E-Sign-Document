@@ -1,1 +1,1 @@
-export class CreateAndSignDocument {}
+export class CreateAndSignDocumentAndSharing{}
